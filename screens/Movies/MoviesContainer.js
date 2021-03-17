@@ -33,5 +33,5 @@ export default () => {
     getData();
   }, []);
 
-  return <MoviesPresent />;
+  return <MoviesPresent {...movies} />;
 };
