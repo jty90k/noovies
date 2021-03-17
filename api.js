@@ -41,5 +41,7 @@ export const tvApi = {
   show: (id) => getAnything(`/tv/${id}`),
 };
 
+export const apiImage = (path) => `https://image.tmdb.org/t/p/w500${path}`;
+
 // ... 뜻은 object의 contents를 get의미이다. 그래서 아래와 같이 page2를 얻는다.
 //makeRequest("/movies", {page:2})
