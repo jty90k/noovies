@@ -9,6 +9,7 @@ import { TouchableOpacity } from "react-native";
 // 앱화면 중간에 있는 횡스크롤
 
 const Container = styled.View`
+  width:100%
   align-items: center;
   margin-right: 20px;
 `;
@@ -19,7 +20,7 @@ const Title = styled.Text`
   margin: 10px; 0px 5px 0px;
 `;
 
-const Vertical = ({ poster, title, votes }) => (
+const Vertical = ({ id, poster, title, votes }) => (
   <TouchableOpacity>
     <Container>
       <Poster url={apiImage(poster)} />
@@ -30,6 +31,7 @@ const Vertical = ({ poster, title, votes }) => (
 );
 
 Vertical.propTypes = {
+  id: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,

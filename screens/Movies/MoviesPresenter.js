@@ -5,6 +5,7 @@ import { ActivityIndicator, Dimensions, ScrollView } from "react-native";
 import Slide from "../../components/Movies/Slide";
 import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
+import Horizontal from "../../components/Horizontal";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -20,12 +21,10 @@ const Container = styled.View``;
 // 근데 핸드폰에서는 그게 안 되기 때문에 SchrollView를 추가한거다 인건 필수다
 // 그냥 justifyContent쓰면 default값이다. React-Native의 flex direction은 column이다, 기본 설정에 의한 거다 (매우중요)
 
-export default ({ loading, nowPlaying, popular }) => (
+export default ({ loading, nowPlaying, popular, upcoming }) => (
   <ScrollView
-    style={{}}
+    style={{ backgroundColor: "black" }}
     contentContainerStyle={{
-      backgroundColor: "black",
-      flex: 1,
       justifyContent: loading ? "center" : "flex-start",
     }}
   >
@@ -51,13 +50,14 @@ export default ({ loading, nowPlaying, popular }) => (
         <Container>
           <Title title={"Popular Movies"} />
           <ScrollView
-            style={{ marginTop: 20 }}
+            style={{ marginTop: 20, marginBottom: 40 }}
             contentContainerStyle={{ paddingleft: 30 }}
             horizontal
             showsHorizontalScrollIndicator={false}
           >
             {popular.map((movie) => (
               <Vertical
+                id={movie.id}
                 key={movie.id}
                 poster={movie.poster_path}
                 title={movie.title}
@@ -65,6 +65,17 @@ export default ({ loading, nowPlaying, popular }) => (
               />
             ))}
           </ScrollView>
+          <Title title={"Coming Soon"}></Title>
+          {upcoming.map((movie) => (
+            <Horizontal
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              votes={movie.vote_average}
+              poster={movie.poster_path}
+              overview={movie.overview}
+            />
+          ))}
         </Container>
       </>
     )}
