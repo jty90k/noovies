@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Poster from "./Poster";
-import { trimText } from "../utils";
+import { formatDate, trimText } from "../utils";
 import { TouchableOpacity } from "react-native";
 import { apiImage } from "../api";
 
 // 다음에 나올 신작영화 소개 로직 코드
 
 const Container = styled.View`
-    padding: 0px; 30px;
-    margin-bottom: 30px;
-    flex-direction: row;
-    align-items: flex-start;
+  padding: 30px;
+  margin-bottom: 30px;
+  flex-direction: row;
+  align-items: flex-start;
 `;
 
 const Data = styled.View`
@@ -43,7 +43,9 @@ const Horizontal = ({ id, title, poster, overview, releaseData }) => (
       <Poster url={poster} />
       <Data>
         <Title>{trimText(title, 30)}</Title>
-        {releaseData ? <ReleaseData>{releaseData}</ReleaseData> : null}
+        {releaseData ? (
+          <ReleaseData>{formatDate(releaseData)}</ReleaseData>
+        ) : null}
         <Overview>{trimText(overview, 130)}</Overview>
       </Data>
     </Container>
