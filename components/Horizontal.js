@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Poster from "./Poster";
-import Votes from "./Votes";
+import { trimText } from "../utils";
+import { TouchableOpacity } from "react-native";
 import { apiImage } from "../api";
 
 // 다음에 나올 신작영화 소개 로직 코드
@@ -14,27 +15,45 @@ const Container = styled.View`
     align-items: flex-start;
 `;
 
-const Data = styled.View``;
+const Data = styled.View`
+  align-items: flex-start;
+  width: 60%;
+  margin-left: 25px;
+`;
 
 const Title = styled.Text`
   color: white;
-  font-weight: 500;
+  font-weight: bold
+  margin-bottom:10px;
 `;
 
-const Horizontal = ({ id, title, votes, poster, overview }) => (
-  <Container>
-    <Poster url={apiImage(poster)} />
-    <Data>
-      <Title>{title}</Title>
-      <Votes votes={votes} />
-    </Data>
-  </Container>
+const ReleaseData = styled.Text`
+  color: white;
+  font-size: 12px;
+`;
+
+const Overview = styled.Text`
+  margin-top: 10px;
+  color: white;
+`;
+
+const Horizontal = ({ id, title, poster, overview, releaseData }) => (
+  <TouchableOpacity>
+    <Container>
+      <Poster url={poster} />
+      <Data>
+        <Title>{trimText(title, 30)}</Title>
+        {releaseData ? <ReleaseData>{releaseData}</ReleaseData> : null}
+        <Overview>{trimText(overview, 130)}</Overview>
+      </Data>
+    </Container>
+  </TouchableOpacity>
 );
 
 Horizontal.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  votes: PropTypes.number.isRequired,
+  releaseData: PropTypes.string,
   overview: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
 };
