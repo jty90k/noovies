@@ -39,6 +39,7 @@ const Title = styled.Text`
 const Votes = styled.Text`
   color: rgb(220,220,220)
   margin-bottom: 5px;
+  font-weight: 500;
   font-size: 12px;
 `;
 
@@ -51,8 +52,9 @@ const Overview = styled.Text`
 const Button = styled.View`
   margin-top: 10px
   background-color: #e74c3c;
-  padding: 5px 10px;
+  padding: 7px 10px;
   border-radius: 3px
+  
 `;
 
 const ButtonText = styled.Text`
@@ -60,15 +62,16 @@ const ButtonText = styled.Text`
 `;
 
 //최종적으로 슬라이드 정보 가져와서 화면에 띄운다.
+// Slice는
 const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => (
   <Container>
     <BG source={{ uri: apiImage(backgroundImage) }} />
     <Content>
       <Poster url={apiImage(poster)} />
       <Data>
-        <Title>{title.slice(0, 30)}</Title>
+        <Title>{title.length > 40 ? `${title.slice(0, 30)}...` : title}</Title>
         <Votes>⭐️ {votes} / 10</Votes>
-        <Overview>{overview.slice(0, 120)}</Overview>
+        <Overview>{overview.slice(0, 110)}...</Overview>
         <TouchableOpacity>
           <Button>
             <ButtonText>View details</ButtonText>
