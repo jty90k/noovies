@@ -7,6 +7,7 @@ import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
 import ScrollContainer from "../../components/ScrollContainer";
+import HorizontalSlider from "../../components/HorizontalSlider";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -48,13 +49,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
 
       {/* 현재 인기 영화 */}
       <Container>
-        <Title title={"Popular Movies"} />
-        <ScrollView
-          style={{ marginTop: 20, marginBottom: 40 }}
-          contentContainerStyle={{ paddingleft: 30 }}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        >
+        <HorizontalSlider title={"Popular Movies"}>
           {popular.map((movie) => (
             <Vertical
               id={movie.id}
@@ -64,8 +59,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
               votes={movie.vote_average}
             />
           ))}
-        </ScrollView>
-
+        </HorizontalSlider>
         {/* 신작 영화 */}
         <Title title={"Coming Soon"}></Title>
         <UpcomingContainer>
