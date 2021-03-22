@@ -10,6 +10,7 @@ export default () => {
     movieError: null,
     showsError: null,
   });
+
   const onChange = (text) => setKeyword(text);
   const search = async () => {
     const [movies, movieError] = await movieApi.search(keyword);
