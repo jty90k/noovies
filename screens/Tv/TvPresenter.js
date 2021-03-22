@@ -2,9 +2,9 @@ import React from "react";
 import HorizontalSlider from "../../components/HorizontalSlider";
 import ScrollContainer from "../../components/ScrollContainer";
 import Vertical from "../../components/Vertical";
-import Horizontal from "../../components/Horizontal";
 import styled from "styled-components/native";
 import List from "../../components/List";
+import Horizontal from "../../components/Horizontal";
 
 const Container = styled.View`
   margin-top: 30px;
