@@ -6,6 +6,7 @@ import Slide from "../../components/Movies/Slide";
 import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
+import ScrollContainer from "../../components/ScrollContainer";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -27,69 +28,59 @@ const UpcomingContainer = styled.View`
 
 export default ({ loading, nowPlaying, popular, upcoming }) => (
   // 현자 상영중인 영화 소개
-  <ScrollView
-    style={{ backgroundColor: "black" }}
-    contentContainerStyle={{
-      flex: loading ? 1 : 0,
-      justifyContent: loading ? "center" : "flex-start",
-    }}
-  >
-    {loading ? (
-      <ActivityIndicator color="white" size="large" />
-    ) : (
-      <>
-        <SliderContainer>
-          <Swiper controlsEnabled={false} loop timeout={3}>
-            {nowPlaying.map((movie) => (
-              <Slide
-                key={movie.id}
-                id={movie.id}
-                title={movie.original_title}
-                overview={movie.overview}
-                votes={movie.vote_average}
-                backgroundImage={movie.backdrop_path}
-                poster={movie.poster_path}
-              />
-            ))}
-          </Swiper>
-        </SliderContainer>
+  <ScrollContainer loading={loading}>
+    <>
+      <SliderContainer>
+        <Swiper controlsEnabled={false} loop timeout={3}>
+          {nowPlaying.map((movie) => (
+            <Slide
+              key={movie.id}
+              id={movie.id}
+              title={movie.original_title}
+              overview={movie.overview}
+              votes={movie.vote_average}
+              backgroundImage={movie.backdrop_path}
+              poster={movie.poster_path}
+            />
+          ))}
+        </Swiper>
+      </SliderContainer>
 
-        {/* 현재 인기 영화 */}
-        <Container>
-          <Title title={"Popular Movies"} />
-          <ScrollView
-            style={{ marginTop: 20, marginBottom: 40 }}
-            contentContainerStyle={{ paddingleft: 30 }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            {popular.map((movie) => (
-              <Vertical
-                id={movie.id}
-                key={movie.id}
-                poster={movie.poster_path}
-                title={movie.title}
-                votes={movie.vote_average}
-              />
-            ))}
-          </ScrollView>
+      {/* 현재 인기 영화 */}
+      <Container>
+        <Title title={"Popular Movies"} />
+        <ScrollView
+          style={{ marginTop: 20, marginBottom: 40 }}
+          contentContainerStyle={{ paddingleft: 30 }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
+          {popular.map((movie) => (
+            <Vertical
+              id={movie.id}
+              key={movie.id}
+              poster={movie.poster_path}
+              title={movie.title}
+              votes={movie.vote_average}
+            />
+          ))}
+        </ScrollView>
 
-          {/* 신작 영화 */}
-          <Title title={"Coming Soon"}></Title>
-          <UpcomingContainer>
-            {upcoming.map((movie) => (
-              <Horizontal
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                releaseData={movie.release_date}
-                poster={movie.poster_path}
-                overview={movie.overview}
-              />
-            ))}
-          </UpcomingContainer>
-        </Container>
-      </>
-    )}
-  </ScrollView>
+        {/* 신작 영화 */}
+        <Title title={"Coming Soon"}></Title>
+        <UpcomingContainer>
+          {upcoming.map((movie) => (
+            <Horizontal
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              releaseData={movie.release_date}
+              poster={movie.poster_path}
+              overview={movie.overview}
+            />
+          ))}
+        </UpcomingContainer>
+      </Container>
+    </>
+  </ScrollContainer>
 );
