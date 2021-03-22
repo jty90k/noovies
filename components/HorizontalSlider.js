@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView } from "react-native";
 import Title from "./Title";
 import PropTypes from "prop-types";
-import Horizontal from "./Horizontal";
 
 const HorizontalSlider = ({ title, children }) => (
   <>
@@ -19,7 +18,7 @@ const HorizontalSlider = ({ title, children }) => (
   </>
 );
 
-Horizontal.propTypes = {
+HorizontalSlider.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };

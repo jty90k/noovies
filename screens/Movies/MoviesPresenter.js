@@ -57,6 +57,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
             />
           ))}
         </HorizontalSlider>
+
         {/* 신작 영화 */}
         <List title={"Coming Soon"}>
           {upcoming.map((movie) => (
