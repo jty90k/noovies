@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Poster from "./Poster";
 import { formatDate, trimText } from "../utils";
 import { TouchableOpacity } from "react-native";
-import { apiImage } from "../api";
 
 // 다음에 나올 신작영화 소개 로직 코드
 

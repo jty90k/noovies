@@ -1,8 +1,10 @@
 import React from "react";
 import { ScrollView } from "react-native";
 import Title from "./Title";
+import PropTypes from "prop-types";
+import Horizontal from "./Horizontal";
 
-export default ({ title, children }) => (
+const HorizontalSlider = ({ title, children }) => (
   <>
     {/* 현재 인기 영화 */}
     <Title title={title} />
@@ -16,3 +18,10 @@ export default ({ title, children }) => (
     </ScrollView>
   </>
 );
+
+Horizontal.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+export default HorizontalSlider;

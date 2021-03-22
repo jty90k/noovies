@@ -8,6 +8,7 @@ import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
 import ScrollContainer from "../../components/ScrollContainer";
 import HorizontalSlider from "../../components/HorizontalSlider";
+import List from "../../components/List";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -18,10 +19,6 @@ const SliderContainer = styled.View`
 `;
 
 const Container = styled.View``;
-
-const UpcomingContainer = styled.View`
-  margin-top: 20px;
-`;
 
 // React-Native에서  ScrollView가 필요한 건 웹브라우저처럼, 브라우저에서는 뭔가가 발생하면 더 많은 컨텐츠들이 있고 크롬에서도 자동으로 스크롤이 되잖아
 // 근데 핸드폰에서는 그게 안 되기 때문에 SchrollView를 추가한거다 인건 필수다
@@ -61,8 +58,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
           ))}
         </HorizontalSlider>
         {/* 신작 영화 */}
-        <Title title={"Coming Soon"}></Title>
-        <UpcomingContainer>
+        <List title={"Coming Soon"}>
           {upcoming.map((movie) => (
             <Horizontal
               key={movie.id}
@@ -73,7 +69,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
               overview={movie.overview}
             />
           ))}
-        </UpcomingContainer>
+        </List>
       </Container>
     </>
   </ScrollContainer>
