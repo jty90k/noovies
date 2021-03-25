@@ -1,16 +1,45 @@
-import React, { route } from "react";
-import { View, Text } from "react-native";
+import React from "react";
+import styled from "styled-components/native";
+import ScrollContainer from "../components/ScrollContainer";
+import Poster from "../components/Poster";
+import Votes from "../components/Votes";
+import { apiImage } from "../api";
+import { Dimensions } from "react-native";
+
+const BG = styled.Image`
+  width: 100%;
+  height: ${Dimensions.get("window").height / 3}px;
+  opacity: 0.4;
+  position: absolute;
+`;
+
+const Header = styled.View``;
+
+const Container = styled.View``;
+
+const Title = styled.Text``;
+
+const Info = styled.View``;
 
 export default ({
   navigation,
   route: {
-    params: { id, title },
+    params: { id, title, backgroundImage, poster, votes },
   },
 }) => {
   navigation.setOptions({ title });
   return (
-    <View>
-      <Text>{id}</Text>
-    </View>
+    <ScrollContainer>
+      <Header>
+        <BG source={{ uri: apiImage(backgroundImage, "-") }} />
+        <Container>
+          <Poster url={poster} />
+          <Info>
+            <Title>{title}</Title>
+            <Votes votes={votes} />
+          </Info>
+        </Container>
+      </Header>
+    </ScrollContainer>
   );
 };
