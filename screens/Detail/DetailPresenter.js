@@ -4,7 +4,7 @@ import ScrollContainer from "../../components/ScrollContainer";
 import Poster from "../../components/Poster";
 import Votes from "../../components/Votes";
 import { apiImage } from "../../api";
-import { Dimensions } from "react-native";
+import { ActivityIndicator, Dimensions } from "react-native";
 
 const BG = styled.Image`
   width: 100%;
@@ -54,25 +54,28 @@ const DataValue = styled.Text`
   font-weight: 500;
 `;
 
-export default ({ backgroundImage, title, votes, overview, poster }) => (
+export default ({ movie, loading }) => (
   <ScrollContainer loading={false}>
     <Header>
-      <BG source={{ uri: apiImage(backgroundImage, "") }} />
+      <BG source={{ uri: apiImage(movie.backgroundImage, "") }} />
       <Container>
-        <Poster url={poster} />
+        <Poster url={movie.poster} />
         <Info>
-          <Title>{title}</Title>
-          {votes && <Votes votes={votes} />}
+          <Title>{movie.title}</Title>
+          {movie.votes && <Votes votes={movie.votes} />}
         </Info>
       </Container>
     </Header>
 
     <Data>
-      {overview && (
+      {movie.overview && (
         <>
           <DataName>Overview</DataName>
-          <DataValue>{overview}</DataValue>
+          <DataValue>{movie.overview}</DataValue>
         </>
+      )}
+      {loading && (
+        <ActivityIndicator style={{ marginTop: 30 }} color={"white"} />
       )}
     </Data>
   </ScrollContainer>

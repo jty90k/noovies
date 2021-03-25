@@ -37,10 +37,24 @@ const Overview = styled.Text`
   color: white;
 `;
 
-const Horizontal = ({ id, title, poster, overview, releaseData }) => {
+const Horizontal = ({
+  isTv = false,
+  id,
+  title,
+  poster,
+  overview,
+  releaseData,
+}) => {
   const navigation = useNavigation();
   const goToDetail = () => {
-    navigation.navigate("Detail", { id, title, poster, overview, releaseData });
+    navigation.navigate("Detail", {
+      isTv,
+      id,
+      title,
+      poster,
+      overview,
+      releaseData,
+    });
   };
   return (
     <TouchableOpacity onPress={goToDetail}>
