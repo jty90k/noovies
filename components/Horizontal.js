@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Poster from "./Poster";
 import { formatDate, trimText } from "../utils";
 import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 // 다음에 나올 신작영화 소개 로직 코드
 
@@ -36,21 +37,26 @@ const Overview = styled.Text`
   color: white;
 `;
 
-const Horizontal = ({ id, title, poster, overview, releaseData }) => (
-  <TouchableOpacity>
-    <Container>
-      <Poster url={poster} />
-      <Data>
-        <Title>{trimText(title, 30)}</Title>
-        {releaseData ? (
-          <ReleaseData>{formatDate(releaseData)}</ReleaseData>
-        ) : null}
-        <Overview>{trimText(overview, 130)}</Overview>
-      </Data>
-    </Container>
-  </TouchableOpacity>
-);
-
+const Horizontal = ({ id, title, poster, overview, releaseData }) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Detail", { id, title, poster, overview, releaseData });
+  };
+  return (
+    <TouchableOpacity onPress={goToDetail}>
+      <Container>
+        <Poster url={poster} />
+        <Data>
+          <Title>{trimText(title, 30)}</Title>
+          {releaseData ? (
+            <ReleaseData>{formatDate(releaseData)}</ReleaseData>
+          ) : null}
+          <Overview>{trimText(overview, 130)}</Overview>
+        </Data>
+      </Container>
+    </TouchableOpacity>
+  );
+};
 Horizontal.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
