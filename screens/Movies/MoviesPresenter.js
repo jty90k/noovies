@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { ActivityIndicator, Dimensions, ScrollView } from "react-native";
+import { Dimensions } from "react-native";
 import Slide from "../../components/Movies/Slide";
-import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
 import ScrollContainer from "../../components/ScrollContainer";
@@ -24,9 +23,9 @@ const Container = styled.View``;
 // 근데 핸드폰에서는 그게 안 되기 때문에 SchrollView를 추가한거다 인건 필수다
 // 그냥 justifyContent쓰면 default값이다. React-Native의 flex direction은 column이다, 기본 설정에 의한 거다 (매우중요)
 
-export default ({ loading, nowPlaying, popular, upcoming }) => (
+export default ({ refreshFn, loading, nowPlaying, popular, upcoming }) => (
   // 현자 상영중인 영화 소개
-  <ScrollContainer loading={loading}>
+  <ScrollContainer refreshFn={refreshFn} loading={loading}>
     <>
       <SliderContainer>
         <Swiper controlsEnabled={false} loop timeout={3}>
