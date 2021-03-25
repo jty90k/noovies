@@ -23,7 +23,7 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
   const loadAssets = () => {
     const images = cacheImages([
-      "https://www.egypttoday.com/siteimages/Larg/36324.jpg",
+      "https://images.unsplash.com/photo-1585951237318-9ea5e175b891?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       require("./assets/splash.png"),
     ]);
     const fonts = cacheFonts([Ionicons.font]);
