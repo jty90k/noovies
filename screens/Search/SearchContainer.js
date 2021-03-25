@@ -22,7 +22,7 @@ export default () => {
       showsError,
     });
   };
-
+  console.log(results);
   return (
     <SearchPresenter
       {...results}
