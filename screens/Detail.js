@@ -8,23 +8,56 @@ import { Dimensions } from "react-native";
 
 const BG = styled.Image`
   width: 100%;
-  height: ${Dimensions.get("window").height / 3}px;
+  height: 100%;
   opacity: 0.4;
   position: absolute;
 `;
 
-const Header = styled.View``;
+const Header = styled.View`
+  height: ${Dimensions.get("window").height / 3}px;
+  align-items: center;
+  justify-content: flex-end;
+`;
 
-const Container = styled.View``;
+const Container = styled.View`
+  flex-direction: row;
+  align-items: center;
+  top: 50px;
+`;
 
-const Title = styled.Text``;
+const Title = styled.Text`
+  color: white;
+  font-weight: 600;
+  font-size: 25px;
+  margin-bottom: 10px;
+`;
 
-const Info = styled.View``;
+const Info = styled.View`
+  width: 50%;
+  margin-left: 40px;
+`;
+
+const Data = styled.View`
+  margin-top: 80px;
+  padding: 0px 35px;
+`;
+
+const DataName = styled.Text`
+  color: white;
+  opacity: 0.8;
+  font-weight: 800;
+`;
+
+const DataValue = styled.Text`
+  color: white;
+  opacity: 0.8;
+  font-weight: 500;
+`;
 
 export default ({
   navigation,
   route: {
-    params: { id, title, backgroundImage, poster, votes },
+    params: { id, title, backgroundImage, poster, votes, overview },
   },
 }) => {
   navigation.setOptions({ title });
@@ -36,10 +69,20 @@ export default ({
           <Poster url={poster} />
           <Info>
             <Title>{title}</Title>
-            <Votes votes={votes} />
+            {votes && <Votes votes={votes} />}
           </Info>
         </Container>
       </Header>
+      <>
+        <Data>
+          {overview && (
+            <>
+              <DataName>Overview</DataName>
+              <DataValue>{overview}</DataValue>
+            </>
+          )}
+        </Data>
+      </>
     </ScrollContainer>
   );
 };
