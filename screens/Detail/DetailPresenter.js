@@ -5,7 +5,7 @@ import Poster from "../../components/Poster";
 import Votes from "../../components/Votes";
 import { apiImage } from "../../api";
 import { ActivityIndicator, Dimensions } from "react-native";
-import { formateDate } from "../../utils";
+import { formatDate } from "../../utils";
 
 const BG = styled.Image`
   width: 100%;
@@ -57,10 +57,13 @@ const DataValue = styled.Text`
 `;
 
 export default ({ result, loading }) => (
-  <ScrollContainer loading={false}>
+  <ScrollContainer
+    loading={false}
+    contentContainerStyle={{ paddingBottom: 80 }}
+  >
     <>
       <Header>
-        <BG source={{ uri: apiImage(result.backgroundImage, "") }} />
+        <BG source={{ uri: apiImage(result.backgroundImage, "-") }} />
         <Container>
           <Poster url={result.poster} />
           <Info>
@@ -69,7 +72,6 @@ export default ({ result, loading }) => (
           </Info>
         </Container>
       </Header>
-
       <Data>
         {result.overview && (
           <>
@@ -88,10 +90,46 @@ export default ({ result, loading }) => (
             </DataValue>
           </>
         )}
-        {result.release_data && (
+        {result.release_date && (
           <>
             <DataName>Release Date</DataName>
-            <DataValue>{formateDate(result.release_data)}</DataValue>
+            <DataValue>{formatDate(result.release_date)}</DataValue>
+          </>
+        )}
+        {result.overview && (
+          <>
+            <DataName>Status</DataName>
+            <DataValue>{result.status}</DataValue>
+          </>
+        )}
+        {result.runtime && (
+          <>
+            <DataName>Runtime</DataName>
+            <DataValue>{result.runtime} minutes</DataValue>
+          </>
+        )}
+        {result.first_air_date && (
+          <>
+            <DataName>First Air Date</DataName>
+            <DataValue>{formatDate(result.first_air_date)}</DataValue>
+          </>
+        )}
+        {result.genres && (
+          <>
+            <DataName>Genres</DataName>
+            <DataValue>
+              {result.genres.map((g, index) =>
+                index + 1 === result.genres.length ? g.name : `${g.name}, `
+              )}
+            </DataValue>
+          </>
+        )}
+        {result.number_of_episodes && (
+          <>
+            <DataName>Seasons / Episodes</DataName>
+            <DataValue>
+              {result.number_of_seasons} / {result.number_of_episodes}{" "}
+            </DataValue>
           </>
         )}
       </Data>
