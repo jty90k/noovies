@@ -5,6 +5,7 @@ import Poster from "../../components/Poster";
 import Votes from "../../components/Votes";
 import { apiImage } from "../../api";
 import { ActivityIndicator, Dimensions } from "react-native";
+import { formateDate } from "../../utils";
 
 const BG = styled.Image`
   width: 100%;
@@ -38,11 +39,12 @@ const Title = styled.Text`
 `;
 
 const Data = styled.View`
-  margin-top: 80px;
+  margin-top: 30px;
   padding: 0px 35px;
 `;
 
 const DataName = styled.Text`
+  margin-top: 30px;
   color: white;
   opacity: 0.8;
   font-weight: 800;
@@ -54,29 +56,45 @@ const DataValue = styled.Text`
   font-weight: 500;
 `;
 
-export default ({ movie, loading }) => (
+export default ({ result, loading }) => (
   <ScrollContainer loading={false}>
-    <Header>
-      <BG source={{ uri: apiImage(movie.backgroundImage, "") }} />
-      <Container>
-        <Poster url={movie.poster} />
-        <Info>
-          <Title>{movie.title}</Title>
-          {movie.votes && <Votes votes={movie.votes} />}
-        </Info>
-      </Container>
-    </Header>
+    <>
+      <Header>
+        <BG source={{ uri: apiImage(result.backgroundImage, "") }} />
+        <Container>
+          <Poster url={result.poster} />
+          <Info>
+            <Title>{result.title}</Title>
+            {result.votes && <Votes votes={result.votes} />}
+          </Info>
+        </Container>
+      </Header>
 
-    <Data>
-      {movie.overview && (
-        <>
-          <DataName>Overview</DataName>
-          <DataValue>{movie.overview}</DataValue>
-        </>
-      )}
-      {loading && (
-        <ActivityIndicator style={{ marginTop: 30 }} color={"white"} />
-      )}
-    </Data>
+      <Data>
+        {result.overview && (
+          <>
+            <DataName>Overview</DataName>
+            <DataValue>{result.overview}</DataValue>
+          </>
+        )}
+        {loading && (
+          <ActivityIndicator style={{ marginTop: 30 }} color={"white"} />
+        )}
+        {result.spoken_languages && (
+          <>
+            <DataName>Languages</DataName>
+            <DataValue>
+              {result.spoken_languages.map((l) => `${l.name}`)}
+            </DataValue>
+          </>
+        )}
+        {result.release_data && (
+          <>
+            <DataName>Release Date</DataName>
+            <DataValue>{formateDate(result.release_data)}</DataValue>
+          </>
+        )}
+      </Data>
+    </>
   </ScrollContainer>
 );
