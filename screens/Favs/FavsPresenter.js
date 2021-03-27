@@ -49,10 +49,21 @@ export default ({ results }) => {
     outputRange: ["-0deg", "0deg", "0deg"],
     extrapolate: "clamp",
   });
+  const secondCardOpacity = position.x.interpolate({
+    inputRange: [-255, 0, 255],
+    outputRange: [1, 0.5, 1],
+    extrapolate: "clamp",
+  });
+  const secondCardScale = position.x.interpolate({
+    inputRange: [-255, 0, 255],
+    outputRange: [1, 0.7, 1],
+    extrapolate: "clamp",
+  });
   return (
     <Container>
       {results.map((result, index) => {
         // 포스터가 상단으로 올라가면 값이 0 가면서 zIndex:1이 된다.
+        // 첫번째 포스터
         if (index === topIndex) {
           return (
             <Animated.View
@@ -70,20 +81,38 @@ export default ({ results }) => {
               <Poster source={{ uri: apiImage(result.poster_path) }} />
             </Animated.View>
           );
+        } else if (index === topIndex + 1) {
+          // 두번째 포스터
+          return (
+            <Animated.View
+              style={{
+                ...styles,
+                zindex: -index,
+                opacity: secondCardOpacity,
+                transform: [{ scale: secondCardScale }],
+              }}
+              key={result.id}
+              {...panResponder.panHandlers}
+            >
+              <Poster source={{ uri: apiImage(result.poster_path) }} />
+            </Animated.View>
+          );
+        } else {
+          // 세번째 포스터
+          return (
+            <Animated.View
+              style={{
+                ...styles,
+                zindex: -index,
+                opacity: 0,
+              }}
+              key={result.id}
+              {...panResponder.panHandlers}
+            >
+              <Poster source={{ uri: apiImage(result.poster_path) }} />
+            </Animated.View>
+          );
         }
-        // 움직 않는 다음 포스터
-        return (
-          <Animated.View
-            style={{
-              ...styles,
-              zindex: -index,
-            }}
-            key={result.id}
-            {...panResponder.panHandlers}
-          >
-            <Poster source={{ uri: apiImage(result.poster_path) }} />
-          </Animated.View>
-        );
       })}
     </Container>
   );
