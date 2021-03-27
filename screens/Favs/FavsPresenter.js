@@ -28,22 +28,41 @@ const styles = {
 
 export default ({ results }) => {
   const [topIndex, setTopIndex] = useState(0);
+  const nextCard = () => setTopIndex((currentValue) => currentValue + 1);
   const position = new Animated.ValueXY();
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, { dx, dy }) => {
       position.setValue({ x: dx, y: dy });
     },
-    onPanResponderRelease: () => {
-      Animated.spring(position, {
-        toValue: {
-          x: 0,
-          y: 0,
-        },
-      }).start();
+    onPanResponderRelease: (evt, { dx, dy }) => {
+      if (dx >= 30) {
+        //console.log("discard to the right");
+        Animated.spring(position, {
+          toValue: {
+            x: WIDTH + 100,
+            y: dy,
+          },
+        }).start(nextCard);
+      } else if (dx <= -30) {
+        //console.log("discard to the left");
+        Animated.spring(position, {
+          toValue: {
+            x: -WIDTH - 100,
+            y: dy,
+          },
+        }).start(nextCard);
+      } else {
+        Animated.spring(position, {
+          toValue: {
+            x: 0,
+            y: 0,
+          },
+        }).start();
+      }
     },
   });
-  // 가장 앞면의 포스터
+  // 카드 넘기는 로직들
   const rotationValues = position.x.interpolate({
     inputRange: [-100, 0, 100],
     outputRange: ["-0deg", "0deg", "0deg"],
@@ -59,11 +78,14 @@ export default ({ results }) => {
     outputRange: [1, 0.7, 1],
     extrapolate: "clamp",
   });
+  // 포스터가 상단으로 올라가면 값이 0 가면서 zIndex:1이 된다.
+  // 첫번째 포스터
   return (
     <Container>
       {results.map((result, index) => {
-        // 포스터가 상단으로 올라가면 값이 0 가면서 zIndex:1이 된다.
-        // 첫번째 포스터
+        if (index < topIndex) {
+          return null;
+        }
         if (index === topIndex) {
           return (
             <Animated.View
