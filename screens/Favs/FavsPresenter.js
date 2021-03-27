@@ -44,9 +44,14 @@ export default ({ results }) => {
     },
   });
   // 가장 앞면의 포스터
+  const rotationValues = position.x.interpolate({
+    inputRange: [-100, 0, 100],
+    outputRange: ["-0deg", "0deg", "0deg"],
+    extrapolate: "clamp",
+  });
   return (
     <Container>
-      {results.reverse().map((result, index) => {
+      {results.map((result, index) => {
         // 포스터가 상단으로 올라가면 값이 0 가면서 zIndex:1이 된다.
         if (index === topIndex) {
           return (
@@ -54,7 +59,10 @@ export default ({ results }) => {
               style={{
                 ...styles,
                 zIndex: 1,
-                transform: [...position.getTranslateTransform()],
+                transform: [
+                  { rotate: rotationValues },
+                  ...position.getTranslateTransform(),
+                ],
               }}
               key={result.id}
               {...panResponder.panHandlers}
@@ -68,6 +76,7 @@ export default ({ results }) => {
           <Animated.View
             style={{
               ...styles,
+              zindex: -index,
             }}
             key={result.id}
             {...panResponder.panHandlers}
