@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { Dimensions, PanResponder, Animated } from "react-native";
+import { Dimensions, PanResponder, Animated, LogBox } from "react-native";
 import styled from "styled-components/native";
 import { apiImage } from "../../api";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
 const Container = styled.View`
-padding-top :50px
+  padding-top :50px
   flex: 1;
   background-color: black;
   align-items: center;
 `;
 
 const Poster = styled.Image`
-border-radius: 20px
+  border-radius: 20px
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -43,6 +43,7 @@ export default ({ results }) => {
             x: WIDTH + 100,
             y: dy,
           },
+          useNativeDriver: true,
         }).start(nextCard);
       } else if (dx <= -30) {
         //console.log("discard to the left");
@@ -51,6 +52,7 @@ export default ({ results }) => {
             x: -WIDTH - 100,
             y: dy,
           },
+          useNativeDriver: true,
         }).start(nextCard);
       } else {
         Animated.spring(position, {
@@ -58,6 +60,7 @@ export default ({ results }) => {
             x: 0,
             y: 0,
           },
+          useNativeDriver: true,
         }).start();
       }
     },
@@ -78,6 +81,7 @@ export default ({ results }) => {
     outputRange: [1, 0.7, 1],
     extrapolate: "clamp",
   });
+
   // 포스터가 상단으로 올라가면 값이 0 가면서 zIndex:1이 된다.
   // 첫번째 포스터
   return (
