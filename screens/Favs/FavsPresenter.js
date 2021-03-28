@@ -36,7 +36,7 @@ export default ({ results }) => {
       position.setValue({ x: dx, y: dy });
     },
     onPanResponderRelease: (evt, { dx, dy }) => {
-      if (dx >= 30) {
+      if (dx >= 35) {
         //console.log("discard to the right");
         Animated.spring(position, {
           toValue: {
@@ -45,7 +45,7 @@ export default ({ results }) => {
           },
           useNativeDriver: true,
         }).start(nextCard);
-      } else if (dx <= -30) {
+      } else if (dx <= -35) {
         //console.log("discard to the left");
         Animated.spring(position, {
           toValue: {
@@ -68,7 +68,9 @@ export default ({ results }) => {
   // 카드 넘기는 로직들
   const rotationValues = position.x.interpolate({
     inputRange: [-100, 0, 100],
+    // 카드가 휘어지는 각도
     outputRange: ["-0deg", "0deg", "0deg"],
+    // 카드를 고정시키는 것
     extrapolate: "clamp",
   });
   const secondCardOpacity = position.x.interpolate({
