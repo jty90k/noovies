@@ -12,19 +12,14 @@ import List from "../../components/List";
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
 const SliderContainer = styled.View`
-  width: ${WIDTH}px;
-  height: ${HEIGHT / 4}px;
+  width: 100%;
+  height: ${HEIGHT / 3}px;
   margin-bottom: 40px;
 `;
 
 const Container = styled.View``;
 
-// React-Native에서  ScrollView가 필요한 건 웹브라우저처럼, 브라우저에서는 뭔가가 발생하면 더 많은 컨텐츠들이 있고 크롬에서도 자동으로 스크롤이 되잖아
-// 근데 핸드폰에서는 그게 안 되기 때문에 SchrollView를 추가한거다 인건 필수다
-// 그냥 justifyContent쓰면 default값이다. React-Native의 flex direction은 column이다, 기본 설정에 의한 거다 (매우중요)
-
 export default ({ refreshFn, loading, nowPlaying, popular, upcoming }) => (
-  // 현자 상영중인 영화 소개
   <ScrollContainer refreshFn={refreshFn} loading={loading}>
     <>
       <SliderContainer>
@@ -42,8 +37,6 @@ export default ({ refreshFn, loading, nowPlaying, popular, upcoming }) => (
           ))}
         </Swiper>
       </SliderContainer>
-
-      {/* 현재 인기 영화 */}
       <Container>
         <HorizontalSlider title={"Popular Movies"}>
           {popular.map((movie) => (
@@ -56,15 +49,13 @@ export default ({ refreshFn, loading, nowPlaying, popular, upcoming }) => (
             />
           ))}
         </HorizontalSlider>
-
-        {/* 신작 영화 */}
-        <List title={"Coming Soon"}>
+        <List title="Coming Soon">
           {upcoming.map((movie) => (
             <Horizontal
               key={movie.id}
               id={movie.id}
               title={movie.title}
-              releaseData={movie.release_date}
+              releaseDate={movie.release_date}
               poster={movie.poster_path}
               overview={movie.overview}
             />

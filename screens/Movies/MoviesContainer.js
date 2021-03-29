@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { movieApi } from "../../api";
-import MoviesPresent from "./MoviesPresenter";
+import MoviesPresenter from "./MoviesPresenter";
 
-// 다른 곳으로 이동시 navigation을 사용한다.
 export default () => {
-  const [refreshing, setRefreshing] = useState(false);
-  // state를 크게 2가지로 사용할 수 있다. (1. 전체를 받아서 사용, 2. 부분으로 사용)
   const [movies, setMovies] = useState({
     loading: true,
     nowPlaying: [],
@@ -26,12 +23,12 @@ export default () => {
       upcoming,
       nowPlayingError,
       popularError,
-      upcoming,
+      upcomingError,
     });
   };
   useEffect(() => {
     getData();
   }, []);
 
-  return <MoviesPresent refreshFn={getData} {...movies} />;
+  return <MoviesPresenter refreshFn={getData} {...movies} />;
 };

@@ -32,7 +32,7 @@ export default ({
         ...getDetail,
         title: getDetail.title || getDetail.name,
         backgroundImage: getDetail.backdrop_path,
-        poster: getDetail.poster_path,
+        poster: getDetail.poster_path || null,
         overview: getDetail.overview,
         votes: getDetail.vote_average,
       },

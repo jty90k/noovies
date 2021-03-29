@@ -75,8 +75,8 @@ Horizontal.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   releaseData: PropTypes.string,
+  poster: PropTypes.string,
   overview: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
 };
 
 export default Horizontal;

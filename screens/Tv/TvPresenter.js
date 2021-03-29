@@ -1,10 +1,10 @@
 import React from "react";
-import HorizontalSlider from "../../components/HorizontalSlider";
 import ScrollContainer from "../../components/ScrollContainer";
+import HorizontalSlider from "../../components/HorizontalSlider";
 import Vertical from "../../components/Vertical";
+import Horizontal from "../../components/Horizontal";
 import styled from "styled-components/native";
 import List from "../../components/List";
-import Horizontal from "../../components/Horizontal";
 
 const Container = styled.View`
   margin-top: 30px;
@@ -13,8 +13,7 @@ const Container = styled.View`
 export default ({ refreshFn, loading, popular, topRated, today }) => (
   <ScrollContainer refreshFn={refreshFn} loading={loading}>
     <Container>
-      {/* Popular TV Show */}
-      <HorizontalSlider title="Popular TV Show">
+      <HorizontalSlider title="Popular Shows">
         {popular.map((show) => (
           <Vertical
             isTv={true}
@@ -26,9 +25,7 @@ export default ({ refreshFn, loading, popular, topRated, today }) => (
           />
         ))}
       </HorizontalSlider>
-
-      {/* TopRated TV Show */}
-      <HorizontalSlider title="Top Rated TV Show">
+      <HorizontalSlider title="Top Rated">
         {topRated.map((show) => (
           <Vertical
             isTv={true}
@@ -40,8 +37,6 @@ export default ({ refreshFn, loading, popular, topRated, today }) => (
           />
         ))}
       </HorizontalSlider>
-
-      {/* Airing Today */}
       <List title="Airing Today">
         {today.map((show) => (
           <Horizontal
