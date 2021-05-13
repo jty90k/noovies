@@ -16,7 +16,6 @@ const getHeaderName = (route) =>
 // Stack Navigator 안에는 Tab Navigator가 들어가 있다. 하단에 메뉴 클릭 시 각 화면으로 이동 시켜주는 것
 // console.log(route)를 찍으면 index값을 알 수 있다. 위에서 아래로 (0,1,2,3)이다.
 export default ({ navigation, route }) => {
-  //
   useLayoutEffect(() => {
     const name = getHeaderName(route);
     navigation.setOptions({
@@ -48,6 +47,7 @@ export default ({ navigation, route }) => {
       })}
       tabBarOptions={{
         showLabel: false,
+
         style: {
           backgroundColor: "black",
           borderTopColor: "black",

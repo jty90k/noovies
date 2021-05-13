@@ -4,8 +4,10 @@ import * as Font from "expo-font";
 import { Image, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Asset } from "expo-asset";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Stack from "./navigation/Stack";
+
+require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf");
 
 const cacheImages = (images) =>
   images.map((image) => {
@@ -16,8 +18,7 @@ const cacheImages = (images) =>
     }
   });
 
-const cacheFonts = (fonts) =>
-  fonts.map((font) => [Font.loadAsync(font), Font.loadAsync(font)]);
+const cacheFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -26,10 +27,10 @@ export default function App() {
       "https://images.unsplash.com/photo-1585951237318-9ea5e175b891?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       require("./assets/splash.png"),
     ]);
-    const fonts = cacheFonts([Ionicons.font]);
+    const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
     return Promise.all([...images, ...fonts]);
   };
-  const onFisnish = () => setIsReady(true);
+  const onFinish = () => setIsReady(true);
   return isReady ? (
     <>
       <NavigationContainer>
@@ -40,7 +41,7 @@ export default function App() {
   ) : (
     <AppLoading
       startAsync={loadAssets}
-      onFinish={onFisnish}
+      onFinish={onFinish}
       onError={console.error}
     />
   );

@@ -39,22 +39,21 @@ const Title = styled.Text`
   margin-bottom: 10px;
 `;
 
-const VotesContainer = styled.Text`
+const VotesContainer = styled.View`
   margin-bottom: 7px;
 `;
 
 const Overview = styled.Text`
-  color: rgb(220,220,220)
-  font-size:14px
+  color: rgb(220, 220, 220);
+  font-size: 14px;
   font-weight: 500;
 `;
 
 const Button = styled.View`
-  margin-top: 10px
+  margin-top: 10px;
   background-color: #e74c3c;
   padding: 7px 10px;
-  border-radius: 3px
-  
+  border-radius: 3px;
 `;
 
 const ButtonText = styled.Text`

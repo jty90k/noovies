@@ -44,7 +44,7 @@ export const tvApi = {
 export const apiImage = (
   path,
   defaultPoster = "https://images.unsplash.com/photo-1585951237318-9ea5e175b891?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80"
-) => (path ? `https://image.tmdb.org/t/p/original/${path}` : defaultPoster);
+) => (path ? `https://image.tmdb.org/t/p/w500${path}` : defaultPoster);
 
 // ... 뜻은 object의 contents를 get의미이다. 그래서 아래와 같이 page2를 얻는다.
 //makeRequest("/movies", {page:2})

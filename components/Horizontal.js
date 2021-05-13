@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import Poster from "./Poster";
-import { formatDate, trimText } from "../utils";
 import { TouchableOpacity } from "react-native";
+import Poster from "./Poster";
+import { trimText, formatDate } from "../utils";
 import { useNavigation } from "@react-navigation/native";
 
 // 다음에 나올 신작영화 소개 로직 코드
@@ -65,7 +65,7 @@ const Horizontal = ({
           {releaseData ? (
             <ReleaseData>{formatDate(releaseData)}</ReleaseData>
           ) : null}
-          <Overview>{trimText(overview, 130)}</Overview>
+          <Overview>{trimText(overview, 80)}</Overview>
         </Data>
       </Container>
     </TouchableOpacity>

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Rx_Movie",
+    "name": "RxMovie",
     "slug": "nooviees",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#000000",
@@ -17,14 +17,23 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "co.nomadcoders.noovies",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "co.goldenadam.Rx_Moive",
+      "permissions": [
+        "READ_PHONE_STATE",
+        "CAMERA",
+        "READ_CONTACTS",
+        "RECORD_AUDIO"
+      ],
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "co.goldenadam.Rx_Moive"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
