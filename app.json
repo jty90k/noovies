@@ -2,7 +2,7 @@
   "expo": {
     "name": "RxMovie",
     "slug": "nooviees",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#000000",
@@ -22,14 +22,17 @@
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "co.goldenadam.Rx_Moive",
       "permissions": [
         "READ_PHONE_STATE",
         "CAMERA",
         "READ_CONTACTS",
-        "RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
       ],
-      "versionCode": 1,
+      "package": "co.goldenadam.Rx_Moive",
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
